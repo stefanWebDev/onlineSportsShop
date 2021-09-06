@@ -1,0 +1,11 @@
+body {
+    background-color: rgb(245, 245, 220);
+}
+#searchbar-div{
+    margin-left: 20px;
+}
+#landingpage-main-div{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+}

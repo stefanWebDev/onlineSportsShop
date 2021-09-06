@@ -1,0 +1,30 @@
+#hero-img {
+    width: 500px;
+    height: 270px;
+}
+
+#quote-text {
+    width: 500px;
+    text-align: end;
+}
+#quote-author {
+    text-align: end;
+}
+
+#content-right-all-div {
+    margin-left: 15%;
+}
+.content-right-buttons {
+    width: 100%;
+    border: none;
+    padding: 10px;
+}
+#content-button-one {
+    background-color: rgb(11, 13, 27);
+    color: white;
+    margin-bottom: 5px;
+}
+#content-button-two {
+    background-color: rgb(255, 94, 19);
+    color: white;
+}

@@ -1,0 +1,24 @@
+#search-div {
+    display: flex;
+}
+
+#search-button {
+    background-color: rgb(255, 94, 19);
+    border: none;
+    color: white;
+    padding: 8px;
+    transition: background-color 0.5s ease;
+}
+select {
+    margin-left: 20px;
+}
+
+#search-button {
+    margin-left: 20px;
+}
+#search-button:hover {
+    background-color: rgb(230, 80, 22);
+}
+#uber-search-div{
+    margin-top: 20px;
+}
