@@ -1,8 +1,8 @@
 import React from "react";
-import { forEachTrailingCommentRange } from "typescript";
 import { ProductAPI } from "../../../api/product.api";
 import { IProps, IState, Product } from "./showSearchInterface";
-import Textfield from '@material-ui/core/Textfield';
+import ShowProductCard from "./ShowProductCard";
+import { Grid } from "@material-ui/core";
 
 class ShowSearch extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -18,46 +18,61 @@ class ShowSearch extends React.Component<IProps, IState> {
 
     return (
       <div>
-        <ul>
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
           {products.map((product) => {
             return (
-              <li>
-                <h3>{product.manufacturer}</h3>
-                <h3>{product.title}</h3>
-                <h3>{product.rating}</h3>
-                <h3>{product.price}</h3>
-                <img src={'/images/productimages/' + product.image + '.jpg'} alt="" />
-                <ul>
-                  {product.bullet_points.map((point) => {
-                    return <li>{point}</li>
-                  })}
-                </ul>
-               
-                <p>{product.description}</p>
-                <p>{product.category}</p>
-              </li>
+              <Grid item xs={12} sm={6} md={3}>
+                <ShowProductCard
+                  _id={product._id}
+                  image={product.image}
+                  manufacturer={product.manufacturer}
+                  title={product.title}
+                  bullet_points={product.bullet_points}
+                  description={product.description}
+                  price={product.price}
+                  category={product.category}
+                  rating={product.rating}
+                />
+              </Grid>
             );
           })}
-        </ul>
+        </Grid>
       </div>
     );
   }
 
-
-
   componentDidMount() {
-    this.fetchAll()
-      .then((result) => {
+    if (this.props.category === "" && this.props.priceRange === "") {
+      console.log("fetchall");
+      this.fetchAll().then((result) => {
         this.setState({
           products: result,
         });
+      });
+    } else {
+      this.fetchSome('category', this.props.category).then((result) => {
+        console.log(result);
+        this.setState({
+          products: result
+        })
       })
-   
+    }
   }
 
   async fetchAll() {
     const resp = await ProductAPI.getAll();
     return resp;
+  }
+
+  async fetchSome(searchCriteria: string, searchTerm: string) {
+    const resp = await ProductAPI.getSome(searchCriteria, searchTerm);
+    return resp || [];
   }
 }
 
